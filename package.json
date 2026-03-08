@@ -1,5 +1,5 @@
 {
-    "name": "depscore",
+    "name": "depstein",
     "version": "0.1.0",
     "description": "Dependency health scorer for npm, PyPI, Cargo, and Go projects",
     "type": "module",
@@ -7,7 +7,7 @@
         "node": ">=18.0.0"
     },
     "bin": {
-        "depscore": "./dist/index.js"
+        "depstein": "dist/index.js"
     },
     "files": [
         "dist/",
@@ -45,6 +45,6 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/depscore/depscore"
+        "url": "git+https://github.com/kstij/DepStein.git"
     }
 }

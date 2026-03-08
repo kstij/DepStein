@@ -59,7 +59,7 @@ function LoadingScreen({ total, done, current, ecosystem }: LoadingProps) {
     return (
         <Box flexDirection="column" padding={1}>
             <Box gap={2}>
-                <Text bold color="cyan">DEPSCORE</Text>
+                <Text bold color="cyan">DEPSTEIN</Text>
                 <Text color="#e04a1a">v0.1.0</Text>
                 <Text dimColor>[{ecosystem}]</Text>
             </Box>
@@ -301,7 +301,7 @@ export function Dashboard({ scanResult, options }: DashboardProps) {
 
         if (input === 'e' && auditResult) {
             try {
-                const path = join(process.cwd(), `depscore-report-${Date.now()}.json`);
+                const path = join(process.cwd(), `depstein-report-${Date.now()}.json`);
                 writeFileSync(path, JSON.stringify(auditResult, null, 2), 'utf-8');
                 setExportMsg(`Exported → ${path}`);
                 setTimeout(() => setExportMsg(null), 3000);
@@ -403,22 +403,22 @@ function renderHeader(scanResult: ScanResult) {
         <Box flexDirection="column">
             {/* ASCII brand in compact single line */}
             <Box paddingX={2} paddingTop={0}>
-                <Text bold color="cyan">{'██████╗ ███████╗██████╗ ███████╗ ██████╗ ██████╗ ██████╗ ███████╗'}</Text>
+                <Text bold color="cyan">{'██████╗ ███████╗██████╗ ███████╗████████╗███████╗██╗███╗   ██╗'}</Text>
             </Box>
             <Box paddingX={2}>
-                <Text bold color="cyan">{'██╔══██╗██╔════╝██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝'}</Text>
+                <Text bold color="cyan">{'██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔════╝██║████╗  ██║'}</Text>
             </Box>
             <Box paddingX={2}>
-                <Text bold color="cyan">{'██║  ██║█████╗  ██████╔╝███████╗██║     ██║   ██║██████╔╝█████╗  '}</Text>
+                <Text bold color="cyan">{'██║  ██║█████╗  ██████╔╝███████╗   ██║   █████╗  ██║██╔██╗ ██║'}</Text>
             </Box>
             <Box paddingX={2}>
-                <Text bold color="cyan">{'██║  ██║██╔══╝  ██╔═══╝ ╚════██║██║     ██║   ██║██╔══██╗██╔══╝  '}</Text>
+                <Text bold color="cyan">{'██║  ██║██╔══╝  ██╔═══╝ ╚════██║   ██║   ██╔══╝  ██║██║╚██╗██║'}</Text>
             </Box>
             <Box paddingX={2}>
-                <Text bold color="cyan">{'██████╔╝███████╗██║     ███████║╚██████╗╚██████╔╝██║  ██║███████╗'}</Text>
+                <Text bold color="cyan">{'██████╔╝███████╗██║     ███████║   ██║   ███████╗██║██║ ╚████║'}</Text>
             </Box>
             <Box paddingX={2} paddingBottom={0}>
-                <Text bold color="cyan">{'╚═════╝ ╚══════╝╚═╝     ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝'}</Text>
+                <Text bold color="cyan">{'╚═════╝ ╚══════╝╚═╝     ╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝'}</Text>
             </Box>
             {/* Info bar below the ASCII art */}
             <Box paddingX={2} gap={2}>

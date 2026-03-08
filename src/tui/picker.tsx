@@ -68,12 +68,12 @@ function PathPicker({ initialPath, options, onPick }: PathPickerProps) {
         <Box flexDirection="column">
             {/* ── ASCII brand ── */}
             <Box flexDirection="column" paddingTop={1}>
-                <Box paddingX={2}><Text bold color="cyan">{'██████╗ ███████╗██████╗ ███████╗ ██████╗ ██████╗ ██████╗ ███████╗'}</Text></Box>
-                <Box paddingX={2}><Text bold color="cyan">{'██╔══██╗██╔════╝██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝'}</Text></Box>
-                <Box paddingX={2}><Text bold color="cyan">{'██║  ██║█████╗  ██████╔╝███████╗██║     ██║   ██║██████╔╝█████╗  '}</Text></Box>
-                <Box paddingX={2}><Text bold color="cyan">{'██║  ██║██╔══╝  ██╔═══╝ ╚════██║██║     ██║   ██║██╔══██╗██╔══╝  '}</Text></Box>
-                <Box paddingX={2}><Text bold color="cyan">{'██████╔╝███████╗██║     ███████║╚██████╗╚██████╔╝██║  ██║███████╗'}</Text></Box>
-                <Box paddingX={2}><Text bold color="cyan">{'╚═════╝ ╚══════╝╚═╝     ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝'}</Text></Box>
+                <Box paddingX={2}><Text bold color="cyan">{'██████╗ ███████╗██████╗ ███████╗████████╗███████╗██╗███╗   ██╗'}</Text></Box>
+                <Box paddingX={2}><Text bold color="cyan">{'██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔════╝██║████╗  ██║'}</Text></Box>
+                <Box paddingX={2}><Text bold color="cyan">{'██║  ██║█████╗  ██████╔╝███████╗   ██║   █████╗  ██║██╔██╗ ██║'}</Text></Box>
+                <Box paddingX={2}><Text bold color="cyan">{'██║  ██║██╔══╝  ██╔═══╝ ╚════██║   ██║   ██╔══╝  ██║██║╚██╗██║'}</Text></Box>
+                <Box paddingX={2}><Text bold color="cyan">{'██████╔╝███████╗██║     ███████║   ██║   ███████╗██║██║ ╚████║'}</Text></Box>
+                <Box paddingX={2}><Text bold color="cyan">{'╚═════╝ ╚══════╝╚═╝     ╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝'}</Text></Box>
                 <Box paddingX={2} paddingBottom={1}>
                     <Text color="#e04a1a">Dependency health scorer</Text>
                     <Text dimColor>  ·  npm · pypi · cargo · go</Text>

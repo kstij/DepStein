@@ -115,7 +115,7 @@ async function runCiMode(scanResult: NonNullable<ReturnType<typeof scan>>, optio
     const isGHA = process.env['GITHUB_ACTIONS'] === 'true';
 
     // Table header
-    process.stdout.write(`\ndepscore CI — ${result.totalCount} packages, avg ${Math.round(result.averageScore)}/100 (${result.grade})\n`);
+    process.stdout.write(`\ndepstein CI — ${result.totalCount} packages, avg ${Math.round(result.averageScore)}/100 (${result.grade})\n`);
     process.stdout.write(`threshold: ${threshold}/100\n\n`);
 
     // Per-package lines
@@ -142,7 +142,7 @@ async function runCiMode(scanResult: NonNullable<ReturnType<typeof scan>>, optio
         const msg = `Average score ${Math.round(result.averageScore)}/100 is below threshold ${threshold}/100`;
         process.stderr.write(`✗ ${msg}\n`);
         if (isGHA) {
-            process.stdout.write(`::error title=depscore::${msg}\n`);
+            process.stdout.write(`::error title=depstein::${msg}\n`);
         }
         process.exit(1);
     } else {
@@ -242,7 +242,7 @@ async function main() {
     const program = new Command();
 
     program
-        .name('depscore')
+        .name('depstein')
         .description('Dependency health scorer for npm, PyPI, Cargo, and Go projects')
         .version(readVersion(), '-v, --version')
         .argument('[path]', 'Path to project directory', '.')
@@ -257,17 +257,17 @@ async function main() {
         .option('--ci', 'CI mode: plain text + GitHub Actions ::error:: annotations (default threshold 70)')
         .addHelpText('after', `
 Examples:
-  $ depscore                        Analyze current directory
-  $ depscore ~/my-project           Analyze specific project
-  $ depscore --filter critical      Show only failing deps
-  $ depscore --json > report.json   Export full report
-  $ depscore --top 10               Show 10 worst packages
-  $ depscore --no-cache             Bypass cache for fresh data
-  $ depscore --fix                  Replace deprecated packages in package.json
-  $ depscore --min-score 75         Fail CI if avg score < 75
-  $ depscore --json --min-score 75  Combined: JSON output + CI threshold
-  $ depscore --ci                   CI mode with GitHub Actions annotations
-  $ depscore --ci --min-score 80    CI mode with custom threshold
+  $ depstein                        Analyze current directory
+  $ depstein ~/my-project           Analyze specific project
+  $ depstein --filter critical      Show only failing deps
+  $ depstein --json > report.json   Export full report
+  $ depstein --top 10               Show 10 worst packages
+  $ depstein --no-cache             Bypass cache for fresh data
+  $ depstein --fix                  Replace deprecated packages in package.json
+  $ depstein --min-score 75         Fail CI if avg score < 75
+  $ depstein --json --min-score 75  Combined: JSON output + CI threshold
+  $ depstein --ci                   CI mode with GitHub Actions annotations
+  $ depstein --ci --min-score 80    CI mode with custom threshold
 `);
 
     program.parse(process.argv);
@@ -327,8 +327,8 @@ Examples:
             if (workspaceRoots.length > 0) {
                 process.stderr.write(
                     `Monorepo detected with ${workspaceRoots.length} workspace packages.\n` +
-                    `Run depscore with a specific workspace path:\n` +
-                    workspaceRoots.slice(0, 5).map(r => `  depscore ${r}`).join('\n') + '\n',
+                    `Run depstein with a specific workspace path:\n` +
+                    workspaceRoots.slice(0, 5).map(r => `  depstein ${r}`).join('\n') + '\n',
                 );
             } else {
                 process.stderr.write(

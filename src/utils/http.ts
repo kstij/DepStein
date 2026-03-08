@@ -1,5 +1,5 @@
 const DEFAULT_HEADERS: Record<string, string> = {
-    'User-Agent': 'depscore/0.1.0 (https://github.com/depscore/depscore)',
+    'User-Agent': 'depstein/0.1.0 (https://github.com/kstij/DepStein)',
     Accept: 'application/json',
 };
 

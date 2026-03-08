@@ -3,7 +3,7 @@ import { join } from 'path';
 import { homedir } from 'os';
 import type { CacheStore, CachedMetadata, PackageMetadata } from './types.js';
 
-const CACHE_DIR = join(homedir(), '.depscore');
+const CACHE_DIR = join(homedir(), '.depstein');
 const CACHE_FILE = join(CACHE_DIR, 'cache.json');
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 

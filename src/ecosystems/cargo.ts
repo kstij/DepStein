@@ -36,7 +36,7 @@ export async function fetchCargo(
         const data = (await fetchJson(`https://crates.io/api/v1/crates/${encodeURIComponent(name)}`, {
             headers: {
                 // crates.io requires a descriptive User-Agent
-                'User-Agent': 'depscore/0.1.0 (https://github.com/depscore/depscore)',
+                'User-Agent': 'depstein/0.1.0 (https://github.com/kstij/DepStein)',
             },
         })) as CratesResponse;
 
