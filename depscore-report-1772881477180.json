@@ -1,0 +1,591 @@
+{
+  "projectPath": "/Users/kshitijvarma/Desktop/defscore",
+  "ecosystem": "npm",
+  "scoredDependencies": [
+    {
+      "raw": {
+        "name": "chalk",
+        "version": "5.3.0",
+        "ecosystem": "npm",
+        "isDev": false
+      },
+      "metadata": {
+        "name": "chalk",
+        "ecosystem": "npm",
+        "latestVersion": "5.6.2",
+        "requestedVersion": "5.3.0",
+        "publishedAt": "2025-09-08T14:47:54.486Z",
+        "description": "Terminal string styling done right",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/chalk/chalk",
+        "weeklyDownloads": 430868578,
+        "monthlyDownloads": null,
+        "totalDownloads": null,
+        "unpackedSize": 44342,
+        "hasBuiltinTypes": true,
+        "hasTypesPackage": false,
+        "vulnerabilities": [
+          {
+            "id": "MAL-2025-46969",
+            "summary": "Malicious code in chalk (npm)",
+            "severity": "LOW",
+            "aliases": [
+              "GHSA-2v46-p5h4-248w"
+            ]
+          }
+        ],
+        "fetchError": null,
+        "fromCache": true
+      },
+      "dimensions": {
+        "maintenance": {
+          "name": "Maintenance",
+          "score": 15,
+          "maxScore": 25,
+          "reason": "Updated within 6 months"
+        },
+        "popularity": {
+          "name": "Popularity",
+          "score": 20,
+          "maxScore": 20,
+          "reason": "430.9M/week"
+        },
+        "bundleSize": {
+          "name": "Bundle Size",
+          "score": 12,
+          "maxScore": 15,
+          "reason": "43.3KB (small)"
+        },
+        "typescript": {
+          "name": "TypeScript",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "Built-in types"
+        },
+        "license": {
+          "name": "License",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "MIT (permissive)"
+        },
+        "vulnerability": {
+          "name": "Security",
+          "score": 7,
+          "maxScore": 10,
+          "reason": "1 vuln(s), LOW"
+        }
+      },
+      "totalScore": 84,
+      "grade": "B",
+      "issues": []
+    },
+    {
+      "raw": {
+        "name": "commander",
+        "version": "11.1.0",
+        "ecosystem": "npm",
+        "isDev": false
+      },
+      "metadata": {
+        "name": "commander",
+        "ecosystem": "npm",
+        "latestVersion": "14.0.3",
+        "requestedVersion": "11.1.0",
+        "publishedAt": "2026-01-31T01:47:17.592Z",
+        "description": "the complete solution for node.js command-line programs",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/tj/commander.js",
+        "weeklyDownloads": 315595339,
+        "monthlyDownloads": null,
+        "totalDownloads": null,
+        "unpackedSize": 208654,
+        "hasBuiltinTypes": true,
+        "hasTypesPackage": false,
+        "vulnerabilities": [],
+        "fetchError": null,
+        "fromCache": true
+      },
+      "dimensions": {
+        "maintenance": {
+          "name": "Maintenance",
+          "score": 20,
+          "maxScore": 25,
+          "reason": "Updated within 90 days"
+        },
+        "popularity": {
+          "name": "Popularity",
+          "score": 20,
+          "maxScore": 20,
+          "reason": "315.6M/week"
+        },
+        "bundleSize": {
+          "name": "Bundle Size",
+          "score": 4,
+          "maxScore": 15,
+          "reason": "203.8KB (large)"
+        },
+        "typescript": {
+          "name": "TypeScript",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "Built-in types"
+        },
+        "license": {
+          "name": "License",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "MIT (permissive)"
+        },
+        "vulnerability": {
+          "name": "Security",
+          "score": 10,
+          "maxScore": 10,
+          "reason": "No known vulnerabilities"
+        }
+      },
+      "totalScore": 84,
+      "grade": "B",
+      "issues": []
+    },
+    {
+      "raw": {
+        "name": "ink",
+        "version": "4.4.1",
+        "ecosystem": "npm",
+        "isDev": false
+      },
+      "metadata": {
+        "name": "ink",
+        "ecosystem": "npm",
+        "latestVersion": "6.8.0",
+        "requestedVersion": "4.4.1",
+        "publishedAt": "2026-02-19T07:01:51.878Z",
+        "description": "React for CLI",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/vadimdemedes/ink",
+        "weeklyDownloads": 2411293,
+        "monthlyDownloads": null,
+        "totalDownloads": null,
+        "unpackedSize": 490262,
+        "hasBuiltinTypes": false,
+        "hasTypesPackage": true,
+        "vulnerabilities": [],
+        "fetchError": null,
+        "fromCache": true
+      },
+      "dimensions": {
+        "maintenance": {
+          "name": "Maintenance",
+          "score": 25,
+          "maxScore": 25,
+          "reason": "Updated within 30 days"
+        },
+        "popularity": {
+          "name": "Popularity",
+          "score": 20,
+          "maxScore": 20,
+          "reason": "2.4M/week"
+        },
+        "bundleSize": {
+          "name": "Bundle Size",
+          "score": 4,
+          "maxScore": 15,
+          "reason": "478.8KB (large)"
+        },
+        "typescript": {
+          "name": "TypeScript",
+          "score": 10,
+          "maxScore": 15,
+          "reason": "@types/ink available"
+        },
+        "license": {
+          "name": "License",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "MIT (permissive)"
+        },
+        "vulnerability": {
+          "name": "Security",
+          "score": 10,
+          "maxScore": 10,
+          "reason": "No known vulnerabilities"
+        }
+      },
+      "totalScore": 84,
+      "grade": "B",
+      "issues": []
+    },
+    {
+      "raw": {
+        "name": "react",
+        "version": "18.2.0",
+        "ecosystem": "npm",
+        "isDev": false
+      },
+      "metadata": {
+        "name": "react",
+        "ecosystem": "npm",
+        "latestVersion": "19.2.4",
+        "requestedVersion": "18.2.0",
+        "publishedAt": "2026-01-26T18:23:10.244Z",
+        "description": "React is a JavaScript library for building user interfaces.",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/facebook/react",
+        "weeklyDownloads": 88164264,
+        "monthlyDownloads": null,
+        "totalDownloads": null,
+        "unpackedSize": 171604,
+        "hasBuiltinTypes": false,
+        "hasTypesPackage": true,
+        "vulnerabilities": [
+          {
+            "id": "GHSA-g53w-52xc-2j85",
+            "summary": "Cross-Site Scripting in react",
+            "severity": "MEDIUM",
+            "aliases": [
+              "CVE-2013-7035"
+            ]
+          },
+          {
+            "id": "GHSA-hg79-j56m-fxgv",
+            "summary": "Cross-Site Scripting in react",
+            "severity": "HIGH",
+            "aliases": []
+          }
+        ],
+        "fetchError": null,
+        "fromCache": true
+      },
+      "dimensions": {
+        "maintenance": {
+          "name": "Maintenance",
+          "score": 20,
+          "maxScore": 25,
+          "reason": "Updated within 90 days"
+        },
+        "popularity": {
+          "name": "Popularity",
+          "score": 20,
+          "maxScore": 20,
+          "reason": "88.2M/week"
+        },
+        "bundleSize": {
+          "name": "Bundle Size",
+          "score": 8,
+          "maxScore": 15,
+          "reason": "167.6KB (medium)"
+        },
+        "typescript": {
+          "name": "TypeScript",
+          "score": 10,
+          "maxScore": 15,
+          "reason": "@types/react available"
+        },
+        "license": {
+          "name": "License",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "MIT (permissive)"
+        },
+        "vulnerability": {
+          "name": "Security",
+          "score": 1,
+          "maxScore": 10,
+          "reason": "2 vuln(s), HIGH"
+        }
+      },
+      "totalScore": 74,
+      "grade": "B",
+      "issues": [
+        "vulnerable"
+      ]
+    },
+    {
+      "raw": {
+        "name": "@types/node",
+        "version": "20.10.0",
+        "ecosystem": "npm",
+        "isDev": true
+      },
+      "metadata": {
+        "name": "@types/node",
+        "ecosystem": "npm",
+        "latestVersion": "25.3.5",
+        "requestedVersion": "20.10.0",
+        "publishedAt": "2026-03-06T00:57:53.166Z",
+        "description": "TypeScript definitions for node",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+        "weeklyDownloads": 264060791,
+        "monthlyDownloads": null,
+        "totalDownloads": null,
+        "unpackedSize": 2376149,
+        "hasBuiltinTypes": true,
+        "hasTypesPackage": false,
+        "vulnerabilities": [],
+        "fetchError": null,
+        "fromCache": true
+      },
+      "dimensions": {
+        "maintenance": {
+          "name": "Maintenance",
+          "score": 25,
+          "maxScore": 25,
+          "reason": "Updated within 30 days"
+        },
+        "popularity": {
+          "name": "Popularity",
+          "score": 20,
+          "maxScore": 20,
+          "reason": "264.1M/week"
+        },
+        "bundleSize": {
+          "name": "Bundle Size",
+          "score": 0,
+          "maxScore": 15,
+          "reason": "2.3MB (huge)"
+        },
+        "typescript": {
+          "name": "TypeScript",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "Built-in types"
+        },
+        "license": {
+          "name": "License",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "MIT (permissive)"
+        },
+        "vulnerability": {
+          "name": "Security",
+          "score": 10,
+          "maxScore": 10,
+          "reason": "No known vulnerabilities"
+        }
+      },
+      "totalScore": 85,
+      "grade": "A",
+      "issues": [
+        "huge size"
+      ]
+    },
+    {
+      "raw": {
+        "name": "@types/react",
+        "version": "18.2.0",
+        "ecosystem": "npm",
+        "isDev": true
+      },
+      "metadata": {
+        "name": "@types/react",
+        "ecosystem": "npm",
+        "latestVersion": "19.2.14",
+        "requestedVersion": "18.2.0",
+        "publishedAt": "2026-02-11T11:44:58.515Z",
+        "description": "TypeScript definitions for react",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+        "weeklyDownloads": 81434433,
+        "monthlyDownloads": null,
+        "totalDownloads": null,
+        "unpackedSize": 410399,
+        "hasBuiltinTypes": true,
+        "hasTypesPackage": false,
+        "vulnerabilities": [],
+        "fetchError": null,
+        "fromCache": true
+      },
+      "dimensions": {
+        "maintenance": {
+          "name": "Maintenance",
+          "score": 25,
+          "maxScore": 25,
+          "reason": "Updated within 30 days"
+        },
+        "popularity": {
+          "name": "Popularity",
+          "score": 20,
+          "maxScore": 20,
+          "reason": "81.4M/week"
+        },
+        "bundleSize": {
+          "name": "Bundle Size",
+          "score": 4,
+          "maxScore": 15,
+          "reason": "400.8KB (large)"
+        },
+        "typescript": {
+          "name": "TypeScript",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "Built-in types"
+        },
+        "license": {
+          "name": "License",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "MIT (permissive)"
+        },
+        "vulnerability": {
+          "name": "Security",
+          "score": 10,
+          "maxScore": 10,
+          "reason": "No known vulnerabilities"
+        }
+      },
+      "totalScore": 89,
+      "grade": "A",
+      "issues": []
+    },
+    {
+      "raw": {
+        "name": "tsx",
+        "version": "4.6.0",
+        "ecosystem": "npm",
+        "isDev": true
+      },
+      "metadata": {
+        "name": "tsx",
+        "ecosystem": "npm",
+        "latestVersion": "4.21.0",
+        "requestedVersion": "4.6.0",
+        "publishedAt": "2025-11-30T15:56:09.488Z",
+        "description": "TypeScript Execute (tsx): Node.js enhanced with esbuild to run TypeScript & ESM files",
+        "license": "MIT",
+        "repositoryUrl": "https://github.com/privatenumber/tsx",
+        "weeklyDownloads": 31307415,
+        "monthlyDownloads": null,
+        "totalDownloads": null,
+        "unpackedSize": 432652,
+        "hasBuiltinTypes": false,
+        "hasTypesPackage": false,
+        "vulnerabilities": [],
+        "fetchError": null,
+        "fromCache": true
+      },
+      "dimensions": {
+        "maintenance": {
+          "name": "Maintenance",
+          "score": 15,
+          "maxScore": 25,
+          "reason": "Updated within 6 months"
+        },
+        "popularity": {
+          "name": "Popularity",
+          "score": 20,
+          "maxScore": 20,
+          "reason": "31.3M/week"
+        },
+        "bundleSize": {
+          "name": "Bundle Size",
+          "score": 4,
+          "maxScore": 15,
+          "reason": "422.5KB (large)"
+        },
+        "typescript": {
+          "name": "TypeScript",
+          "score": 0,
+          "maxScore": 15,
+          "reason": "No TypeScript types"
+        },
+        "license": {
+          "name": "License",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "MIT (permissive)"
+        },
+        "vulnerability": {
+          "name": "Security",
+          "score": 10,
+          "maxScore": 10,
+          "reason": "No known vulnerabilities"
+        }
+      },
+      "totalScore": 64,
+      "grade": "C",
+      "issues": [
+        "no types"
+      ]
+    },
+    {
+      "raw": {
+        "name": "typescript",
+        "version": "5.3.0",
+        "ecosystem": "npm",
+        "isDev": true
+      },
+      "metadata": {
+        "name": "typescript",
+        "ecosystem": "npm",
+        "latestVersion": "5.9.3",
+        "requestedVersion": "5.3.0",
+        "publishedAt": "2025-09-30T21:19:38.784Z",
+        "description": "TypeScript is a language for application scale JavaScript development",
+        "license": "Apache-2.0",
+        "repositoryUrl": "https://github.com/microsoft/TypeScript",
+        "weeklyDownloads": 139217426,
+        "monthlyDownloads": null,
+        "totalDownloads": null,
+        "unpackedSize": 23625066,
+        "hasBuiltinTypes": true,
+        "hasTypesPackage": false,
+        "vulnerabilities": [],
+        "fetchError": null,
+        "fromCache": true
+      },
+      "dimensions": {
+        "maintenance": {
+          "name": "Maintenance",
+          "score": 15,
+          "maxScore": 25,
+          "reason": "Updated within 6 months"
+        },
+        "popularity": {
+          "name": "Popularity",
+          "score": 20,
+          "maxScore": 20,
+          "reason": "139.2M/week"
+        },
+        "bundleSize": {
+          "name": "Bundle Size",
+          "score": 0,
+          "maxScore": 15,
+          "reason": "22.5MB (huge)"
+        },
+        "typescript": {
+          "name": "TypeScript",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "Built-in types"
+        },
+        "license": {
+          "name": "License",
+          "score": 15,
+          "maxScore": 15,
+          "reason": "Apache-2.0 (permissive)"
+        },
+        "vulnerability": {
+          "name": "Security",
+          "score": 10,
+          "maxScore": 10,
+          "reason": "No known vulnerabilities"
+        }
+      },
+      "totalScore": 75,
+      "grade": "B",
+      "issues": [
+        "huge size"
+      ]
+    }
+  ],
+  "averageScore": 79.875,
+  "grade": "B",
+  "totalCount": 8,
+  "criticalCount": 0,
+  "poorCount": 0,
+  "fairCount": 1,
+  "goodCount": 5,
+  "excellentCount": 2,
+  "timestamp": "2026-03-07T11:02:27.097Z"
+}
