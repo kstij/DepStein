@@ -1,0 +1,436 @@
+import { ethers } from 'ethers'
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate, Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { toast } from 'react-hot-toast'
+import { Users, Clock, Trophy, Share2, AlertCircle } from 'lucide-react'
+import useStore from '../store/useStore'
+import Countdown from '../components/Countdown'
+import LoadingSpinner, { PageLoader } from '../components/LoadingSpinner'
+import { ConfirmModal, ImageModal } from '../components/Modal'
+
+export default function PollPage() {
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [poll, setPoll] = useState(null)
+  const [prediction, setPrediction] = useState(null)
+  const [selectedOption, setSelectedOption] = useState(null)
+  const [stakeAmount, setStakeAmount] = useState('0.001')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [zoomedImage, setZoomedImage] = useState(null)
+
+  const { 
+    fetchPoll, 
+    fetchUserPrediction, 
+    submitPrediction, 
+    distributeRewards,
+    closePoll,
+    fetchUserStats,
+    account, 
+    connectWallet,
+    currency,
+    ethPrice
+  } = useStore()
+
+  useEffect(() => {
+    loadData()
+  }, [id, account])
+
+  useEffect(() => {
+    if (prediction?.hasPredicted) {
+      setSelectedOption(prediction.optionIndex)
+    }
+  }, [prediction])
+
+  const loadData = async () => {
+    const pollData = await fetchPoll(id)
+    if (!pollData) {
+      toast.error('Poll not found')
+      navigate('/')
+      return
+    }
+    setPoll(pollData)
+
+    if (account) {
+      const userPred = await fetchUserPrediction(id)
+      setPrediction(userPred)
+    }
+  }
+
+  const handlePredict = async () => {
+    if (!account) {
+      connectWallet()
+      return
+    }
+    setShowConfirm(true)
+  }
+
+  const confirmPrediction = async () => {
+    setIsSubmitting(true)
+    try {
+      await submitPrediction(id, selectedOption, stakeAmount)
+      toast.success('Prediction submitted successfully!')
+      setShowConfirm(false)
+      loadData()
+    } catch (error) {
+      toast.error(error.message || 'Failed to submit prediction')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleClaim = async () => {
+    setIsSubmitting(true)
+    try {
+      await distributeRewards(id)
+      toast.success('Rewards distributed successfully!')
+      loadData()
+      fetchUserStats(account) // Update user stats (balance/earnings)
+    } catch (error) {
+      toast.error(error.message || 'Failed to distribute rewards')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleFinalize = async () => {
+    setIsSubmitting(true)
+    try {
+      await closePoll(id)
+      toast.success('Poll finalized successfully!')
+      loadData()
+    } catch (error) {
+      toast.error(error.message || 'Failed to finalize poll')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleShare = async () => {
+    const shareData = {
+      title: `PonderChain: ${poll.question}`,
+      text: `Predict the outcome of "${poll.question}" on PonderChain and win rewards!`,
+      url: window.location.href,
+    }
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData)
+      } else {
+        await navigator.clipboard.writeText(window.location.href)
+        toast.success('Link copied to clipboard!')
+      }
+    } catch (err) {
+      console.error('Error sharing:', err)
+    }
+  }
+
+  if (!poll) return <PageLoader />
+
+  const totalVotes = poll.optionVotes.reduce((a, b) => a + b, 0)
+  const isVotingOpen = poll.isActive && poll.timeRemaining > 0
+  const isPendingClosure = poll.isActive && poll.timeRemaining <= 0
+  const isClosed = !poll.isActive
+  const hasPredicted = prediction?.hasPredicted
+
+  const calculateEstimatedReturn = () => {
+    if (!poll) return '0'
+    
+    // If user has already predicted
+    if (hasPredicted) {
+      const currentPool = parseFloat(poll.rewardPool)
+      const currentVotes = poll.optionVotes[prediction.optionIndex]
+      if (currentVotes === 0) return '0'
+      
+      // If user is the only one on this option, they get the whole pool
+      // Return exact string to avoid rounding discrepancies
+      if (currentVotes === 1) return poll.rewardPool
+      
+      const estimated = currentPool / currentVotes
+      return estimated.toFixed(6)
+    }
+
+    // If user is about to predict
+    if (selectedOption === null || !stakeAmount) return '0'
+    
+    const currentPool = parseFloat(poll.rewardPool)
+    const myStake = parseFloat(stakeAmount)
+    const currentVotes = poll.optionVotes[selectedOption]
+    
+    const newPool = currentPool + myStake
+    const newVotes = currentVotes + 1
+    
+    return (newPool / newVotes).toFixed(6)
+  }
+
+  const formatAmount = (amount) => {
+    if (currency === 'USD') {
+      return `$${(parseFloat(amount) * ethPrice).toFixed(2)}`
+    }
+    return `${parseFloat(amount).toFixed(5)} ETH`
+  }
+
+  const estimatedReturn = calculateEstimatedReturn()
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="space-y-8"
+      >
+        {/* Header */}
+        <div className="space-y-4">
+          <div className="flex items-center space-x-2 text-sm font-bold text-black">
+            <Link to="/" className="hover:underline">HOME</Link>
+            <span>/</span>
+            <span>POLL #{poll.id}</span>
+          </div>
+          
+          <h1 className="text-4xl md:text-5xl font-black text-black uppercase tracking-tight">
+            {poll.question}
+          </h1>
+
+          <div className="flex flex-wrap items-center gap-4 text-sm font-bold">
+            <div className="flex items-center space-x-2 px-4 py-2 bg-white border-2 border-black shadow-neo rounded-none">
+              <Users className="w-4 h-4 text-black" />
+              <span className="text-black">{poll.totalPredictions} PREDICTIONS</span>
+            </div>
+            <div className="flex items-center space-x-2 px-4 py-2 bg-neo-yellow border-2 border-black shadow-neo rounded-none">
+              <Trophy className="w-4 h-4 text-black" />
+              <span className="text-black">{formatAmount(poll.rewardPool)} POOL</span>
+            </div>
+            {isVotingOpen ? (
+              <div className="flex items-center space-x-2 px-4 py-2 bg-neo-green border-2 border-black shadow-neo rounded-none">
+                <Clock className="w-4 h-4 text-black" />
+                <Countdown endTime={poll.endTime} compact />
+              </div>
+            ) : (
+              <div className="px-4 py-2 bg-neo-pink border-2 border-black shadow-neo rounded-none text-black">
+                {isPendingClosure ? 'PENDING FINALIZATION' : 'ENDED'}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Options Column */}
+          <div className="md:col-span-2 space-y-4">
+            {poll.options.map((option, idx) => {
+              const showResults = hasPredicted || !isVotingOpen
+              const percentage = totalVotes > 0 
+                ? ((poll.optionVotes[idx] / totalVotes) * 100).toFixed(1) 
+                : 0
+              const isSelected = selectedOption === idx
+              const isUserChoice = prediction?.hasPredicted && prediction?.optionIndex === idx
+              const isWinner = isClosed && idx === poll.winningOption
+              const optionImage = poll.optionImages?.[idx]
+
+              return (
+                <button
+                  key={idx}
+                  onClick={() => isVotingOpen && !hasPredicted && setSelectedOption(idx)}
+                  disabled={!isVotingOpen || hasPredicted}
+                  className={`w-full relative overflow-hidden transition-all border-2 border-black shadow-neo hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-neo-lg active:translate-x-[0px] active:translate-y-[0px] active:shadow-none ${
+                    isSelected
+                      ? 'bg-neo-blue'
+                      : isWinner
+                      ? 'bg-neo-green'
+                      : 'bg-white hover:bg-gray-50'
+                  } ${!isVotingOpen || hasPredicted ? 'cursor-default' : 'cursor-pointer'}`}
+                >
+                  {/* Progress Bar */}
+                  {showResults && (
+                    <div
+                      className="absolute inset-0 opacity-20 bg-black"
+                      style={{ width: `${percentage}%` }}
+                    />
+                  )}
+
+                  <div className="relative z-10 flex">
+                    {/* Option Image */}
+                    {optionImage && (
+                      <div 
+                        className="w-24 h-24 md:w-32 md:h-32 flex-shrink-0 border-r-2 border-black bg-gray-100 cursor-zoom-in hover:opacity-80 transition-opacity"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          setZoomedImage(`https://ipfs.io/ipfs/${optionImage}`)
+                        }}
+                      >
+                        <img 
+                          src={`https://ipfs.io/ipfs/${optionImage}`} 
+                          alt={option}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    <div className="flex-1 p-4 flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-6 h-6 border-2 border-black flex items-center justify-center flex-shrink-0 ${
+                          isSelected || isUserChoice
+                            ? 'bg-black text-white'
+                            : 'bg-white'
+                        }`}>
+                          {(isSelected || isUserChoice) && <div className="w-2 h-2 bg-white" />}
+                        </div>
+                        <span className="font-bold text-black uppercase text-left">
+                          {option}
+                        </span>
+                        {isWinner && <Trophy className="w-4 h-4 text-black" />}
+                        {isUserChoice && <span className="text-xs font-bold text-black bg-white px-1 border border-black">(YOUR CHOICE)</span>}
+                      </div>
+                      <span className="text-black font-mono font-bold ml-2">
+                        {showResults ? `${percentage}%` : '???'}
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Action Column */}
+          <div className="space-y-6">
+            <div className="neo-card p-6 space-y-6 bg-white">
+              <h3 className="text-xl font-black text-black uppercase">
+                {hasPredicted ? 'YOUR PREDICTION' : 'MAKE A PREDICTION'}
+              </h3>
+
+              {hasPredicted ? (
+                <div className="space-y-4">
+                  <div className="p-4 bg-neo-blue border-2 border-black shadow-neo-sm">
+                    <p className="text-sm font-bold text-black mb-1">YOU PREDICTED:</p>
+                    <p className="text-xl font-black text-black uppercase">
+                      {poll.options[prediction.optionIndex]}
+                    </p>
+                    <div className="flex justify-between items-center mt-2">
+                      <p className="text-xs font-bold text-black">
+                        STAKE: {formatAmount(prediction.amount)}
+                      </p>
+                      <p className="text-xs font-bold text-black bg-white px-2 py-1 border border-black">
+                        EST. RETURN: {formatAmount(estimatedReturn)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {isPendingClosure && (
+                    <button
+                      onClick={handleFinalize}
+                      disabled={isSubmitting}
+                      className="w-full neo-button bg-neo-pink text-black"
+                    >
+                      {isSubmitting ? <LoadingSpinner size="sm" /> : 'FINALIZE POLL'}
+                    </button>
+                  )}
+
+                  {isClosed && !poll.rewardsDistributed && prediction.optionIndex === poll.winningOption && (
+                    <button
+                      onClick={handleClaim}
+                      disabled={isSubmitting}
+                      className="w-full neo-button bg-neo-green text-black"
+                    >
+                      {isSubmitting ? <LoadingSpinner size="sm" /> : 'DISTRIBUTE REWARDS'}
+                    </button>
+                  )}
+
+                  {isClosed && poll.rewardsDistributed && prediction.optionIndex === poll.winningOption && (
+                    <div className="space-y-2">
+                      <div className="p-3 bg-neo-green border-2 border-black text-black font-bold text-center text-sm shadow-neo-sm">
+                        REWARDS DISTRIBUTED 🎉
+                      </div>
+                      <p className="text-xs font-bold text-black text-center">
+                        Check your wallet for the incoming transaction.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ) : isVotingOpen ? (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-bold text-black mb-2 uppercase">
+                      Stake Amount (ETH)
+                      {currency === 'USD' && <span className="text-gray-500 font-normal ml-2">~ ${(parseFloat(stakeAmount || 0) * ethPrice).toFixed(2)}</span>}
+                    </label>
+                    <input
+                      type="number"
+                      value={stakeAmount}
+                      onChange={(e) => setStakeAmount(e.target.value)}
+                      min="0.001"
+                      step="0.001"
+                      className="neo-input w-full"
+                    />
+                  </div>
+
+                  <button
+                    onClick={handlePredict}
+                    disabled={selectedOption === null || !stakeAmount}
+                    className="w-full neo-button bg-neo-yellow text-black disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {account ? 'SUBMIT PREDICTION' : 'CONNECT WALLET'}
+                  </button>
+                  
+                  {selectedOption !== null && stakeAmount && (
+                    <div className="p-2 bg-neo-green border-2 border-black text-center shadow-neo-sm">
+                      <p className="text-xs font-bold text-black uppercase">ESTIMATED WINNINGS</p>
+                      <p className="text-lg font-black text-black">{formatAmount(estimatedReturn)}</p>
+                    </div>
+                  )}
+                  
+                  <p className="text-xs font-bold text-black text-center">
+                    MIN STAKE: 0.001 ETH {currency === 'USD' && `(~$${(0.001 * ethPrice).toFixed(2)})`}
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="text-center font-bold text-black py-4 border-2 border-black bg-gray-100">
+                    THIS POLL HAS ENDED.
+                  </div>
+                  
+                  {isPendingClosure && (
+                    <button
+                      onClick={handleFinalize}
+                      disabled={isSubmitting}
+                      className="w-full neo-button bg-neo-pink text-black"
+                    >
+                      {isSubmitting ? <LoadingSpinner size="sm" /> : 'FINALIZE POLL'}
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Share */}
+            <button 
+              onClick={handleShare}
+              className="w-full flex items-center justify-center space-x-2 p-3 bg-white border-2 border-black shadow-neo hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-neo-lg transition-all text-black font-bold uppercase"
+            >
+              <Share2 className="w-4 h-4" />
+              <span>SHARE POLL</span>
+            </button>
+          </div>
+        </div>
+      </motion.div>
+
+      <ConfirmModal
+        isOpen={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        onConfirm={confirmPrediction}
+        title="CONFIRM PREDICTION"
+        message={`Are you sure you want to predict "${poll.options[selectedOption]}" with ${stakeAmount} ETH ${currency === 'USD' ? `(~$${(parseFloat(stakeAmount) * ethPrice).toFixed(2)})` : ''} stake? This action cannot be undone.`}
+        isLoading={isSubmitting}
+      />
+
+      <ImageModal 
+        isOpen={!!zoomedImage}
+        onClose={() => setZoomedImage(null)}
+        imageUrl={zoomedImage}
+      />
+    </div>
+  )
+}
