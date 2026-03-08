@@ -1,24 +1,24 @@
 <p align="center">
-  <img src="https://img.shields.io/npm/v/depscore?color=0ea5e9&style=flat-square" alt="npm version" />
-  <img src="https://img.shields.io/npm/l/depscore?color=22c55e&style=flat-square" alt="license" />
-  <img src="https://img.shields.io/node/v/depscore?color=f59e0b&style=flat-square" alt="node version" />
+  <img src="https://img.shields.io/npm/v/depstein?color=0ea5e9&style=flat-square" alt="npm version" />
+  <img src="https://img.shields.io/npm/l/depstein?color=22c55e&style=flat-square" alt="license" />
+  <img src="https://img.shields.io/node/v/depstein?color=f59e0b&style=flat-square" alt="node version" />
   <img src="https://img.shields.io/badge/ecosystems-npm%20%C2%B7%20PyPI%20%C2%B7%20Cargo%20%C2%B7%20Go-a855f7?style=flat-square" alt="ecosystems" />
 </p>
 
 ```
-██████╗ ███████╗██████╗ ███████╗ ██████╗ ██████╗ ██████╗ ███████╗
-██╔══██╗██╔════╝██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝
-██║  ██║█████╗  ██████╔╝███████╗██║     ██║   ██║██████╔╝█████╗
-██║  ██║██╔══╝  ██╔═══╝ ╚════██║██║     ██║   ██║██╔══██╗██╔══╝
-██████╔╝███████╗██║     ███████║╚██████╗╚██████╔╝██║  ██║███████╗
-╚═════╝ ╚══════╝╚═╝     ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+██████╗ ███████╗██████╗ ███████╗████████╗███████╗██╗███╗   ██╗
+██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔════╝██║████╗  ██║
+██║  ██║█████╗  ██████╔╝███████╗   ██║   █████╗  ██║██╔██╗ ██║
+██║  ██║██╔══╝  ██╔═══╝ ╚════██║   ██║   ██╔══╝  ██║██║╚██╗██║
+██████╔╝███████╗██║     ███████║   ██║   ███████╗██║██║ ╚████║
+╚═════╝ ╚══════╝╚═╝     ╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝
 ```
 
 <p align="center"><strong>Dependency health scoring for npm · PyPI · Cargo · Go — right in your terminal.</strong></p>
 
 <br />
 
-depscore audits every dependency in your project and scores it **0–100** across six dimensions — security, maintenance, popularity, bundle size, TypeScript support, and license. Pop it open with a single command and get an interactive TUI to triage your dependencies before they become problems.
+depstein audits every dependency in your project and scores it **0–100** across six dimensions — security, maintenance, popularity, bundle size, TypeScript support, and license. Pop it open with a single command and get an interactive TUI to triage your dependencies before they become problems.
 
 ---
 
@@ -74,7 +74,7 @@ depscore audits every dependency in your project and scores it **0–100** acros
       or:  date-fns  (94/100 A)  — saves 281KB gzip   modular date utilities
 ```
 
-### Interactive Path Picker (run `depscore` from any directory)
+### Interactive Path Picker (run `depstein` from any directory)
 
 ```
   ██████╗ ███████╗██████╗  ...
@@ -91,7 +91,7 @@ depscore audits every dependency in your project and scores it **0–100** acros
 ### CI Output (`--ci`)
 
 ```
-depscore CI — 32 packages, avg 68/100 (C)
+depstein CI — 32 packages, avg 68/100 (C)
 threshold: 70/100
 
   ✗ moment                           42/100  D  outdated, huge bundle
@@ -113,13 +113,13 @@ In GitHub Actions, failing packages additionally emit `::error::` annotations vi
 
 ```bash
 # Install globally
-npm install -g depscore
+npm install -g depstein
 
 # Or run without installing
-npx depscore
+npx depstein
 
 # Or with Bun
-bunx depscore
+bunx depstein
 ```
 
 **Requirements:** Node.js 18+
@@ -130,35 +130,35 @@ bunx depscore
 
 ```bash
 # Open the interactive TUI (auto-detects ecosystem)
-depscore
+depstein
 
 # Analyze a specific directory
-depscore ~/projects/my-app
+depstein ~/projects/my-app
 
 # Show only failing/critical dependencies
-depscore --filter critical
+depstein --filter critical
 
 # Sort by date last updated (oldest first = most stale)
-depscore --sort updated
+depstein --sort updated
 
 # Show only the 10 worst packages
-depscore --top 10
+depstein --top 10
 
 # Export a full JSON report
-depscore --json > report.json
+depstein --json > report.json
 
 # CI mode — plain text + GitHub Actions annotations
-depscore --ci
-depscore --ci --min-score 80
+depstein --ci
+depstein --ci --min-score 80
 
 # Auto-replace deprecated packages in package.json
-depscore --fix
+depstein --fix
 
 # Force a specific ecosystem
-depscore --ecosystem pypi
+depstein --ecosystem pypi
 
 # Bypass disk cache for fresh API data
-depscore --no-cache
+depstein --no-cache
 ```
 
 ---
@@ -190,7 +190,7 @@ depscore --no-cache
 | `Esc` | Close the detail panel |
 | `f` | Cycle filters (all → critical → poor → dev → prod) |
 | `s` | Cycle sort (score → name → size → updated) |
-| `e` | Export report to `depscore-report-<timestamp>.json` |
+| `e` | Export report to `depstein-report-<timestamp>.json` |
 | `q` | Quit |
 
 ---
@@ -300,7 +300,7 @@ Non-npm packages receive 15/15.
 
 ## `--fix` — Automated Replacements
 
-`depscore --fix` rewrites `package.json` replacing 30+ known problematic packages:
+`depstein --fix` rewrites `package.json` replacing 30+ known problematic packages:
 
 | Remove | Replace with | Why |
 |--------|-------------|-----|
@@ -326,7 +326,7 @@ Run `npm install` after `--fix` to apply lockfile changes.
 
 ```yaml
 - name: Audit dependencies
-  run: npx depscore --ci --min-score 75
+  run: npx depstein --ci --min-score 75
 ```
 
 - Outputs a plain-text table of all packages with scores and issues
@@ -337,14 +337,14 @@ Run `npm install` after `--fix` to apply lockfile changes.
 
 ```bash
 # Fail if average drops below 70
-depscore --min-score 70 --json
+depstein --min-score 70 --json
 ```
 
 ---
 
 ## Caching
 
-API responses are cached at `~/.depscore/cache.json` with a **1-hour TTL**. Repeated runs are near-instant. Cached packages are labelled `[cached]` in the detail panel. Use `--no-cache` to bypass.
+API responses are cached at `~/.depstein/cache.json` with a **1-hour TTL**. Repeated runs are near-instant. Cached packages are labelled `[cached]` in the detail panel. Use `--no-cache` to bypass.
 
 ---
 
@@ -388,7 +388,7 @@ src/
 ├── index.ts                   CLI entry (Commander) — routes to TUI / JSON / CI / fix
 ├── core/
 │   ├── types.ts               Shared TypeScript interfaces
-│   ├── cache.ts               Disk cache  (~/.depscore/cache.json, 1-hr TTL)
+│   ├── cache.ts               Disk cache  (~/.depstein/cache.json, 1-hr TTL)
 │   ├── scanner.ts             Detects ecosystem, parses manifests + lockfiles
 │   ├── fetcher.ts             Parallel batch fetcher (10 concurrent)
 │   ├── scorer.ts              Pure scoring engine (6 dimensions → 0–100)
@@ -417,8 +417,8 @@ src/
 ## Development
 
 ```bash
-git clone https://github.com/depscore/depscore
-cd depscore
+git clone https://github.com/depstein/depstein
+cd depstein
 npm install
 
 # Run in dev mode against any local project
