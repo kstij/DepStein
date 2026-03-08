@@ -1,120 +1,62 @@
-import { Link } from 'react-router-dom'
-import { Github, Twitter, MessageCircle, ExternalLink } from 'lucide-react'
+import { Github } from 'lucide-react'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
-  const socialLinks = [
-    { icon: Github, href: 'https://github.com/varshithm7x/veto', label: 'GitHub' },
-    { icon: Twitter, href: 'https://twitter.com/ponderchain', label: 'Twitter' },
-    { icon: MessageCircle, href: 'https://discord.gg/ponderchain', label: 'Discord' },
-  ]
-
-  const footerLinks = [
-    {
-      title: 'Product',
-      links: [
-        { label: 'Home', href: '/' },
-        { label: 'Create Poll', href: '/create' },
-        { label: 'Leaderboard', href: '/leaderboard' },
-      ],
-    },
-    {
-      title: 'Resources',
-      links: [
-        { label: 'Documentation', href: '/docs' },
-        { label: 'Smart Contract', href: 'https://sepolia-blockscout.lisk.com', external: true },
-        { label: 'Lisk Network', href: 'https://lisk.com', external: true },
-      ],
-    },
-    {
-      title: 'Legal',
-      links: [
-        { label: 'Terms of Service', href: '#' },
-        { label: 'Privacy Policy', href: '#' },
-      ],
-    },
-  ]
-
   return (
     <footer className="border-t-2 border-black mt-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
-          <div className="col-span-2">
-            <Link to="/" className="flex items-center space-x-2 mb-4">
+          <div className="md:col-span-2 space-y-4">
+            <div className="flex items-center space-x-2">
               <div className="w-10 h-10 border-2 border-black bg-neo-black flex items-center justify-center shadow-neo-sm">
-                <img src="/veto.webp" alt="VETO" className="w-6 h-6 object-contain" />
+                <span className="text-white font-black text-xs">DS</span>
               </div>
-              <span className="text-xl font-black text-black uppercase">VETO</span>
-            </Link>
-            <p className="text-black font-bold text-sm mb-4 max-w-xs">
-              A DECENTRALIZED PREDICTIVE POLLING GAME ON LISK BLOCKCHAIN. PREDICT THE MAJORITY, EARN REWARDS.
+              <span className="text-xl font-black text-black uppercase">DEPSTEIN</span>
+            </div>
+            <p className="text-gray-600 font-medium max-w-xs">
+              Dependency health scoring for npm &middot; PyPI &middot; Cargo &middot; Go &mdash; right in your terminal.
             </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 border-2 border-black bg-white hover:bg-neo-blue text-black transition-all shadow-neo-sm hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-neo"
-                  title={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
+            <div className="flex items-center space-x-3">
+              <a href="https://github.com/kstij/DepStein" target="_blank" rel="noopener noreferrer"
+                className="p-2 border-2 border-black shadow-neo-sm hover:shadow-neo transition-all bg-white hover:bg-gray-100">
+                <Github className="w-5 h-5" />
+              </a>
+              <a href="https://www.npmjs.com/package/depstein" target="_blank" rel="noopener noreferrer"
+                className="px-3 py-1 border-2 border-black shadow-neo-sm hover:shadow-neo transition-all bg-neo-pink font-bold text-sm">
+                npm
+              </a>
+            </div>
+          </div>
+
+          {/* Install */}
+          <div>
+            <h3 className="font-black uppercase text-sm mb-3 border-b-2 border-black pb-2">Install</h3>
+            <div className="space-y-2 text-sm font-medium text-gray-700">
+              <p className="font-mono bg-gray-100 px-2 py-1 border border-gray-200">npm install -g depstein</p>
+              <p className="font-mono bg-gray-100 px-2 py-1 border border-gray-200">npx depstein</p>
+              <p className="font-mono bg-gray-100 px-2 py-1 border border-gray-200">bunx depstein</p>
             </div>
           </div>
 
           {/* Links */}
-          {footerLinks.map((group) => (
-            <div key={group.title}>
-              <h4 className="text-black font-black uppercase mb-4">{group.title}</h4>
-              <ul className="space-y-2">
-                {group.links.map((link) => (
-                  <li key={link.label}>
-                    {link.external ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-black font-bold hover:underline text-sm flex items-center space-x-1 transition-colors"
-                      >
-                        <span>{link.label}</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    ) : (
-                      <Link
-                        to={link.href}
-                        className="text-black font-bold hover:underline text-sm transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
+          <div>
+            <h3 className="font-black uppercase text-sm mb-3 border-b-2 border-black pb-2">Links</h3>
+            <div className="space-y-2 text-sm">
+              <a href="https://github.com/kstij/DepStein" target="_blank" rel="noopener noreferrer"
+                className="block font-bold hover:underline">GitHub</a>
+              <a href="https://www.npmjs.com/package/depstein" target="_blank" rel="noopener noreferrer"
+                className="block font-bold hover:underline">npm package</a>
+              <a href="https://github.com/kstij/DepStein/issues" target="_blank" rel="noopener noreferrer"
+                className="block font-bold hover:underline">Report Issue</a>
             </div>
-          ))}
+          </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-12 pt-8 border-t-2 border-black flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-black font-bold text-sm">
-            © {currentYear} PONDERCHAIN. BUILT ON LISK.
-          </p>
-          <div className="flex items-center space-x-2 text-black font-bold text-sm">
-            <span>POWERED BY</span>
-            <a
-              href="https://lisk.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-black hover:underline font-black uppercase"
-            >
-              Lisk
-            </a>
-          </div>
+        <div className="mt-12 pt-6 border-t-2 border-black flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm font-bold text-gray-600">&copy; {currentYear} depstein. MIT License.</p>
+          <p className="text-sm font-bold text-gray-600">Made with &#9829; &mdash; <code className="font-mono bg-gray-100 px-1">depstein@0.1.1</code></p>
         </div>
       </div>
     </footer>

@@ -11,7 +11,14 @@
   cursor: url("data:image/svg+xml;utf8,<svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M2 2L12 28L16 16L28 12L2 2Z' fill='black' stroke='white' stroke-width='2'/></svg>") 2 2, auto;
 }
 
-a, button, [role="button"], .cursor-pointer, label, input[type="checkbox"], input[type="radio"], select {
+a,
+button,
+[role="button"],
+.cursor-pointer,
+label,
+input[type="checkbox"],
+input[type="radio"],
+select {
   cursor: pointer;
 }
 
@@ -26,7 +33,7 @@ html {
 
 body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  background-color: #F7F9F9;
+  background-color: #ffffff;
   min-height: 100vh;
   color: #050505;
   -webkit-font-smoothing: antialiased;
@@ -46,7 +53,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #FF6B6B;
   border: 2px solid #050505;
-  box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -57,7 +64,7 @@ body {
   .neo-card {
     @apply bg-white border-2 border-black shadow-neo transition-all duration-200;
   }
-  
+
   .neo-button {
     @apply px-6 py-3 bg-neo-yellow border-2 border-black shadow-neo font-bold text-black transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none hover:bg-yellow-400;
   }
@@ -71,7 +78,9 @@ body {
   }
 
   /* Legacy class mappings to Neobrutalism */
-  .glass, .glass-dark, .card {
+  .glass,
+  .glass-dark,
+  .card {
     @apply neo-card;
   }
 
@@ -106,7 +115,7 @@ body {
   .badge-info {
     @apply bg-neo-blue text-white;
   }
-  
+
   .gradient-text {
     @apply text-black font-black;
     background: none;
@@ -114,3 +123,149 @@ body {
   }
 }
 
+/* ─── Smooth theme transition ────────────────────────── */
+/* Applied to everything except transform/opacity so Framer Motion isn't affected */
+html.theme-ready *,
+html.theme-ready *::before,
+html.theme-ready *::after {
+  transition:
+    background-color 0.35s ease,
+    color 0.25s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease !important;
+}
+
+/* Toggle icon spin-in animation */
+@keyframes themeIconSpin {
+  from {
+    transform: rotate(-120deg) scale(0.4);
+    opacity: 0;
+  }
+
+  to {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.theme-icon-spin {
+  display: block;
+  animation: themeIconSpin 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ─── Dark Mode overrides ─────────────────────────────── */
+.dark body {
+  background-color: #0f0f0f;
+  color: #f0f0f0;
+}
+
+.dark .neo-card {
+  background-color: #1c1c1c;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 4px 4px 0 0 rgba(255, 255, 255, 0.35);
+}
+
+.dark .bg-white {
+  background-color: #1c1c1c !important;
+}
+
+.dark .bg-neo-white {
+  background-color: #111111 !important;
+}
+
+.dark .bg-gray-100 {
+  background-color: #2a2a2a !important;
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background-color: #2a2a2a !important;
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background-color: #2a2a2a !important;
+}
+
+.dark .text-black {
+  color: #f0f0f0 !important;
+}
+
+/* Keep text dark on vivid-colour backgrounds */
+.dark .bg-neo-yellow .text-black,
+.dark .bg-neo-yellow .text-black *,
+.dark .bg-neo-pink .text-black,
+.dark .bg-neo-pink .text-black *,
+.dark .bg-neo-green .text-black,
+.dark .bg-neo-green .text-black *,
+.dark .bg-neo-orange .text-black,
+.dark .bg-neo-orange .text-black *,
+.dark [class*="bg-neo-yellow"],
+.dark [class*="bg-neo-yellow"] * {
+  color: #050505 !important;
+}
+
+/* Keep bg-white elements white inside vivid-colour backgrounds */
+.dark .bg-neo-yellow .bg-white,
+.dark [class*="bg-neo-yellow"] .bg-white,
+.dark .bg-neo-pink .bg-white,
+.dark .bg-neo-green .bg-white,
+.dark .bg-neo-orange .bg-white {
+  background-color: #ffffff !important;
+  color: #050505 !important;
+}
+
+.dark .text-gray-800 {
+  color: #d4d4d4 !important;
+}
+
+.dark .text-gray-700 {
+  color: #c0c0c0 !important;
+}
+
+.dark .text-gray-600 {
+  color: #a0a0a0 !important;
+}
+
+.dark .text-gray-500 {
+  color: #8a8a8a !important;
+}
+
+.dark .text-red-600 {
+  color: #fca5a5 !important;
+}
+
+.dark .text-green-600 {
+  color: #86efac !important;
+}
+
+.dark .border-black {
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.dark .border-gray-200 {
+  border-color: #3a3a3a !important;
+}
+
+.dark .border-gray-300 {
+  border-color: #4a4a4a !important;
+}
+
+.dark .border-gray-700 {
+  border-color: #555 !important;
+}
+
+.dark .shadow-neo {
+  box-shadow: 4px 4px 0 0 rgba(255, 255, 255, 0.35) !important;
+}
+
+.dark .shadow-neo-sm {
+  box-shadow: 2px 2px 0 0 rgba(255, 255, 255, 0.35) !important;
+}
+
+.dark .shadow-neo-lg {
+  box-shadow: 8px 8px 0 0 rgba(255, 255, 255, 0.35) !important;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0f0f0f;
+  border-left-color: #333;
+}
